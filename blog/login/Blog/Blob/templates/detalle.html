@@ -1,0 +1,81 @@
+{%extends "base.html"%}
+{%block contenido%}
+<div class="container md:flex justify-center mx-auto h-full mt-2">
+
+    <div class="grid w-full md:w-1/2">
+        <div class="w-full border p-4 grid justify-items-center">
+            <p class="italic font-semibold text-green-500 text-2xl">{{blog.titulo}}</p>
+            <p class="font-semibold text-gray-900">{{blog.subtitulo}}</p>
+            <p class="font-semibold text-gray-900">{{blog.fecha}}</p>
+            <p class="font-semibold text-gray-900">{{blog.autor}}</p>
+
+            <div class="w-1/2 mt-5 mb-5">
+                {%if blog.imagen %}
+                <img src="{{blog.imagen.url}}" alt="Imagen no Encontrada" srcset="" class="w-full">
+                {%endif%}
+                {%if user%}
+                <div class="flex justify-center">
+                    <form action="{%url 'delete_comentario' blog.id %}" method="post" class="m-2">
+                        {%csrf_token%}
+                        <button type="submit" title="eliminar"><i class="fa-solid fa-trash"></i></button>
+                    </form>
+
+                    <div class="m-2"><button type="button" title="editar" id="btn-edit" onclick="edit();"><i
+                                class="fa-solid fa-pen-to-square"></i></button></div>
+                </div>
+                <form action="{%url 'edit_comentario' blog.id %}" enctype="multipart/form-data" method="post" id="form" class="ml-5 row-auto justify-center" hidden>
+                    {%csrf_token%}
+                    <input type="file" name="imagen" id="imagen" required class="border p-4 m-4" title="imagen">
+                    <button type="submit" title="editar"
+                        class="text-white font-semibold p-2 bg-green-900">Guardar</button>
+                </form>
+                {%endif%}
+
+            </div>
+
+            {{blog.descripcion}}
+        </div>
+
+        <div class="mt-5 w-full">
+            {% if messages %}
+            {%for item in messages%}
+            <div class="bg-green-500 font-semibold text-white text-2xl p-2 w-full">
+                {{item}}
+            </div>
+
+            {%endfor%}
+
+            {%endif%}
+            <form action="{% url 'comentario' blog.id %}" method="post" class="p-4 grid border w-full">
+                {% csrf_token %}
+                <label for="autor" class="m-4">Autor</label>
+                <input type="text" name="autor" id="autor" class="p-4 m-4 border rounded-md" required />
+                <textarea rows="3" cols="4" id="comentario" name="comentario" placeholder="Ingresa tu comentario"
+                    class="m-4  border rounded-md" required></textarea>
+                <button type="submit" class="text-white font-semibold bg-green-600 p-3 rounded-md">Enviar</button>
+            </form>
+
+        </div>
+
+    </div>
+    <div class="w-full md:w-1/2">
+        <p class="m-4 font-semibold text-2xl">Ultimos Comentarios</p>
+        {% for c in comentarios%}
+        <div class="border rounded-md p-4 m-2">
+            <p class="mt-2 mb-2">{{c.comentario}}</p>
+            <p>{{c.fecha}}</p>
+            <p class="font-semibold text-2xl">{{c.autor}}</p>
+        </div>
+        {%endfor%}
+    </div>
+
+</div>
+<script>
+    function edit() {
+        formulario_edit=document.getElementById('form');
+        formulario_edit.removeAttribute('hidden')
+        
+    }
+</script>
+
+{%endblock%}

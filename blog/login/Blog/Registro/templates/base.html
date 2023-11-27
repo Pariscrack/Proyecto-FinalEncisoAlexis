@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+<body>
+    <header>
+        <nav class="flex justify-between w-full h-auto bg-gray-900 text-white font-semibold">
+            <a href="{%url 'principal'%}" title="logo"> <img
+                    src="https://www.secoemp.com/wp-content/uploads/2018/04/LOGO-SIN-FONDO-SECOEMP.png" alt="" srcset=""
+                    class="h-[100px]">
+            </a>
+            <ul class="flex justify-end">
+                <li class="p-4 m-4 hover:text-yellow-400"><a href="{%url 'principal'%}">Home</a></li>
+                <li class="p-4 m-4  hover:text-yellow-400"><a href="{%url 'blob'%}">Blog</a></li>
+                <li class="p-4 m-4  hover:text-yellow-400"><a href="{%url 'about'%}">Acerca de Mi</a>
+                </li>
+                <li class="p-4 m-4  hover:text-yellow-400"><a href="{%url 'logout'%}" title="Logout"><i
+                            class="fa-solid fa-right-from-bracket"></i></a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    {%block contenido%}
+    {%endblock%}
+
+    <footer class="grid justify-items-center w-full h-auto mt-5 bg-gray-900 text-white font-semibold p-5">
+        <p>@Copyrigth 2023. Todos los Derechos Reservados</p>
+        <a href="{%url 'principal'%}" title="logo"> <img
+                src="https://www.secoemp.com/wp-content/uploads/2018/04/LOGO-SIN-FONDO-SECOEMP.png" alt="" srcset=""
+                class="h-[50px]">
+        </a>
+
+    </footer>
+
+</body>
+
+</html>

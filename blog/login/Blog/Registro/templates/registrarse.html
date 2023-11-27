@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body>
+    <div
+        class="container  grid mx-auto my-auto p-4 bg-gradient-to-r from-blue-500 to-red-500 justify-items-center overflow-y-auto">
+        <div class="w-full md:w-1/2 h-full bg-gray-900 text-white my-auto p-8">
+            {% if messages %}
+            {% for message in messages %}
+            <div class="p-4 m-5 bg-green-500 text-white font-semibold">
+                {{message}}
+            </div>
+            {%endfor%}
+            {%endif%}
+
+            <p class="text-2xl font-semibold">Registrarse</p>
+           <hr>
+            <form action="register" method="post" class="grid justify-items-center">
+                {% csrf_token %}
+                <div class="mt-5 grid w-full">
+                    <label for="username">Nombre de Usuario</label>
+                    <input type="text" name="username" id="username" class="p-3 rounded-md text-black" required>
+                </div>
+                <div class="mt-5 grid w-full">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" class="p-3 rounded-md text-black" required>
+                </div>
+                <div class="mt-5 grid w-full"> <label for="pass">Password</label>
+                    <input type="text" name="pass" id="pass" class="p-3 rounded-md text-black" required>
+                </div>
+                <div class="mt-5 grid w-full"> <label for="tipo">Tipo</label>
+                    <select name="tipo" id="tipo" class="p-3 text-black rounded-md">
+                        <option value="user" selected>Usuario</option>
+                        <option value="admin">Admin</option>
+
+                    </select>
+                </div>
+                <button type="submit"
+                    class="bg-green-500 text-white font-semibold w-1/3 mt-5 p-5 rounded-md">Registrarse</button>
+                <a href="{%url 'login' %}" class="mt-4 text-blue-500 font-semibold">Ya estas Registrado?. Iniciar Sesión</a>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
